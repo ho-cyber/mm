@@ -3,7 +3,8 @@ import Image from 'next/image'
 import axios from "axios"
 import React from "react"
 import { Configuration, OpenAIApi } from "openai";
-const config = new Configuration({ apiKey: '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' });
+const key = process.env.API_KEY
+const config = new Configuration({ apiKey: key });
 const openai = new OpenAIApi(config);
 import logo from "../logo.png"
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
     changeLoading(true)
 
     const prompt = `
-    Generate a hilarious meme based off of the following prompt and format:
+    Generate a hillarious meme based off of the following prompt and format:
 
     ${input}.
 
@@ -47,7 +48,7 @@ export default function Home() {
       method: 'post',
       url: 'https://api.openai.com/v1/images/generations',
       headers: { 
-        'Authorization': 'Bearer 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', 
+        'Authorization': `Bearer ${key}`, 
         'Content-Type': 'application/json'
       },
       data : data
